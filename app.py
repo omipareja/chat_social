@@ -105,7 +105,7 @@ class RoomForm(FlaskForm):
 #########################PRUEBA##################################
 # initialize socketIO
 socketio = SocketIO(app)
-ROOMS = ['Anime', 'Manga', 'Videojuegos', 'Musica', 'Megas', "Random"]
+ROOMS = ['Anime', 'Manga', 'Videojuegos', 'Musica', 'Megas', "Random","Lounge"]
 USERS = []
 # Configure flask login
 login = LoginManager(app)

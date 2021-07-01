@@ -5,100 +5,228 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Chat Social</title>
+    <title>{% block title %}{% endblock %} - RChat</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/united/bootstrap.min.css" integrity="sha384-JW3PJkbqVWtBhuV/gsuyVVt3m/ecRJjwXC3gCXlTzZZV+zIEEl6AnryAriT7GWYm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/darkly/bootstrap.min.css" integrity="sha512-U4WaRm7u3LeQy69FgQcz1CBxA32VsI/OeUdcCC5iBbwdjbfRcE+9E2wnJjXPO/bRfrClPTDYTLgBOekcTiBEgQ==" crossorigin="anonymous" />
+    <!-- Custom css for prelogin pages -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main_style.css') }}">
+    <!-- #########################################  -->
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='adminL/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href=" https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminL/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminL/dist/css/adminlte.min.css') }}">
+    <!--sidebar-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminL/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
-    <!-- Custom css for chat pages -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat_style.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
 </head>
 
-<body>
-    <!-- Flash error messages -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <p class=formError>{{ messages[0] }}</p>
-    {% endif %}
-    {% endwith %}
 
-    <div class="wrapper">
-
-        <!-- Nav bar start -->
-        <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-
-            <div class="container-fluid">
-                <div id="show-sidebar-button" class="cursor-pointer">
-                    <i class="fas fa-plus-circle "></i>
-                    <span>Salas</span>
-                </div>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a id="logout-btn" class="nav-link" href="{{ url_for('logout') }}"><span
-                                    style="color: #335177">Cerrar sesion</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Nav bar end -->
-
-        <!-- Main section start -->
-        <div id="main-section">
-
-            <!-- Sidebar start -->
-            <nav id="sidebar">
-                <h4>Salas</h4>
-                {% for room in rooms %}
-                <p id="{{ room|title }}" class="select-room cursor-pointer">{{ room|title }}</p>
-                {% endfor %}
-                <hr>
-                <h4>Conectados</h4>
-                {% for user in users %}
-                <p id="{{ user|title }}" class="select-room cursor-pointer">{{ user|title }}</p>
-                {% endfor %}
-
-                <hr>
-                <hr>
-                <a href={{url_for('create')}}>Crear sala</a>
-
-
-            </nav>
-            <!-- Sidebar end -->
-
-            <!-- Rightside pannel start -->
-            <div id="rightside-pannel">
-
-                <!-- Display message start-->
-                <div id="display-message-section">
-
-                </div>
-                <!-- Display message end -->
-
-                <!-- Type message start -->
-                <div id="input-area" class="input-group mb-3">
-                    <input type="text" id="user_message" class="form-control" placeholder="Escribe un mensaje..."
-                        aria-label="Type a message" aria-describedby="basic-addon2" autocomplete="off">
-                    <div class="input-group-append">
-                        <button id="send_message" class="btn btn-warning" type="button">Enviar <i
-                                class="fas fa-paper-plane"></i></button>
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+          <!-- Navbar -->
+          <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              </li>
+            </ul>
+        
+            <!-- SEARCH FORM -->
+        
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Messages Dropdown Menu -->
+              <li class="nav-item dropdown">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                  <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                      <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          Brad Diesel
+                          <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">Call me whenever you can...</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
                     </div>
+                    <!-- Message End -->
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                      <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          John Pierce
+                          <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">I got your message bro</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
+                    </div>
+                    <!-- Message End -->
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                      <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          Nora Silvester
+                          <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">The subject goes here</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
+                    </div>
+                    <!-- Message End -->
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
-                <!-- Type message end -->
-            </div>
-            <!-- Rightside pannel end -->
-        </div>
-        <!-- Main section end -->
-    </div>
-    <!-- Wrapper end -->
+              </li>
+              <!-- Notifications Dropdown Menu -->
+              <li class="nav-item">
+                <a href="{{ url_for('logout') }}"  type="button" class="btn btn-block btn-secondary">Salir</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.navbar -->
+        
+          <!-- Main Sidebar Container -->
+          <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
 
+            </a>
+        
+            <!-- Sidebar -->
+            <div class="sidebar">
+              <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                       <li class="nav-item">
+                            <h4 style="border-left: 30px; color: azure;">Salas</h4>
+                            {% for room in rooms %}
+                           <ul>
+                            <p id="{{ room|title }}" class="select-room cursor-pointer" style="color: azure;">{{ room|title }}</p>
+                            </ul>
+                            {% endfor %}
+                            <hr>
+                            <h4 style="color: azure;">Conectados</h4>
+                            {% for user in users %}
+                            <p id="{{ user|title }}" class="select-room cursor-pointer" style="color: azure;">{{ user|title }}</p>
+                            {% endfor %}
+            
+                            <hr>
+                            <hr>
+                            <a href={{url_for('create')}}>Crear sala</a>
+                      </li>
+
+                </ul>
+                
+
+
+                <hr>
+                <hr>
+              </nav>
+              <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+          </aside>
+        
+          <!-- Content Wrapper. Contains page content -->
+          <div class="content-wrapper">
+        
+            <!-- Main content -->
+            <section class="content">
+  
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Default box -->
+                    <br>
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Chat</h3>
+        
+                        <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        </div>
+                      </div>
+                      <div class="card-body" id="card-body">
+                        <div id="main-section">
+
+                            <!-- Sidebar end -->
+                
+                            <!-- Rightside pannel start -->
+                            <div id="rightside-pannel">
+                
+                                <!-- Display message start-->
+                                <div id="display-message-section">
+                
+                                </div>
+                                <!-- Display message end -->
+                
+                                <!-- Type message start -->
+                                <div id="input-area" class="input-group mb-3">
+                                    <input type="text" id="user_message" class="form-control" placeholder="Escribe un mensaje..."
+                                        aria-label="Type a message" aria-describedby="basic-addon2" autocomplete="off">
+                                    <div class="input-group-append">
+                                        <button id="send_message" class="btn btn-warning" type="button">Enviar <i
+                                                class="fas fa-paper-plane"></i></button>
+                                    </div>
+                                </div>
+                                <!-- Type message end -->
+                            </div>
+                            <!-- Rightside pannel end -->
+                        </div>
+                      <!-- /.card-body -->
+                      <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- /.content -->
+          </div>
+          <!-- /.content-wrapper -->
+        
+          <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+              <b>Version</b> 3.0.4
+            </div>
+            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
+          </footer>
+        
+          <!-- Control Sidebar -->
+          <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+          </aside>
+          <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!------------PROPIOS----------------->
     <!-- Get username -->
     <span id="get-username">{{ username }}</span>
 
@@ -127,6 +255,18 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
 
-</body>
 
-</html>
+        <!---------ENDPROPIOS---------------<-->
+        
+        <!-- jQuery -->
+        <script src="{{ url_for('static', filename='adminL/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ url_for('static', filename='adminL/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{{ url_for('static', filename='adminLoverlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ url_for('static', filename='adminL/dist/js/adminlte.min.js') }}"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="{{ url_for('static', filename='adminL/dist/js/demo.js') }}"></script>
+        </body>
+        </html>

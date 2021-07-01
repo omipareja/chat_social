@@ -1,49 +1,5 @@
 
-body {
-    background-image: url("images/fondo.jpeg") ;
-}
-
-.wrapper {
-    display: flex;
-}
-
-#main-section {
-    overflow: hidden; /* Makee this div contain its floated children */
-    width: 100%;
-}
-
-#sidebar {
-    margin-top: 2em;
-    float: left; /* Make this div as wide as its contents */
-    min-height: 96vh;
-    padding-left: 1em;
-    padding-top: 3em;
-    padding-right:1em;
-    border-right: 0.5px solid #898c91;
-}
-
-#sidebar p {
-    padding-left: 2em;
-    padding-right:2em;
-}
-
-#sidebar p:hover {
-    background-color: #ffc107;
-}
-
-#sidebar h4 {padding-left: 0.5em;}
-
-
-#sidebar.view-sidebar {display: none;}
-
-#show-sidebar-button {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s;
-    color: #335177;
-}
-
-@media (max-width: 567px) {
+@media (max-width: 607px) {
     #sidebar {
         display: none;
     }
@@ -63,14 +19,12 @@ body {
     cursor: pointer;
 }
 
-#rightside-pannel {
-    overflow: hidden; /* Make this div take up the rest of the horizontal space, and no more */
-}
+
 
 #display-message-section {
-    margin-top: 5em;
-    min-height: 82vh;
-    max-height: 82vh;
+    margin-top: 1em;
+    min-height: 60vh;
+    max-height: 60vh;
     overflow-y: auto; /*Make  this section scrolable */
 }
 
@@ -81,7 +35,7 @@ body {
 }
 
 input[type=text]:focus{
-    border-color: #ffc107;
+    border-color: #606e6c;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 10px #ffc107;
 }
 
@@ -98,7 +52,7 @@ input[type=text]:focus{
     border-color: grey;
     border-width: 0.5px;
     border-style: solid;
-    background-color: #C2DBFB;
+    background-color: #b2fbf0;
     /* animation */
     animation-name: fadeIn;
     animation-duration: 0.75s;
@@ -143,11 +97,11 @@ input[type=text]:focus{
 .my-username {
     font-weight: bold;
     font-size: 1.1em;
-    color: #FF6B13;
+    color: #262ee9;
 }
 
 #msg-input {
-    border-color: #ffc107;
+    border-color: #606e6c;
     border-width: 5px;
 }
 
